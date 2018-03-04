@@ -1,7 +1,10 @@
 // @flow
 
+import guid from 'simple-guid'
 import isEqual from 'lodash.isequal'
 import type { State, AttributeInput } from './types'
+
+const anonymizeLineItem = lineItem => ({ ...lineItem, id: undefined, quantity: undefined })
 
 export const addLineItem = (
   variantId: string,
@@ -10,19 +13,19 @@ export const addLineItem = (
 ) => (state: State): State => ({
   ...state,
   lineItems: state.lineItems.concat([
-    { variantId, quantity, customAttributes },
+    { id: guid(), variantId, quantity, customAttributes },
   ]),
 })
 
 export const updateLineItem = (
-  index: number,
+  id: string,
   quantity: number,
   customAttributes?: AttributeInput[],
 ) => (state: State): State => ({
   ...state,
   lineItems: state.lineItems.map(
-    (lineItem, i) =>
-      i === index
+    lineItem =>
+      lineItem.id === id
         ? {
             ...lineItem,
             quantity: quantity || lineItem.quantity,
@@ -32,11 +35,9 @@ export const updateLineItem = (
   ),
 })
 
-export const removeLineItem = (index: number) => (state: State): State => ({
+export const removeLineItem = (id: string) => (state: State): State => ({
   ...state,
-  lineItems: state.lineItems
-    .slice(0, index)
-    .concat(state.lineItems.slice(index + 1)),
+  lineItems: state.lineItems.filter(lineItem => lineItem.id !== id),
 })
 
 export const normalizeLineItems = (state: State): State => ({
@@ -45,7 +46,7 @@ export const normalizeLineItems = (state: State): State => ({
     if (curr.quantity < 1) return acc
 
     const equalIndex = acc.findIndex(x =>
-      isEqual({ ...x, quantity: undefined }, { ...curr, quantity: undefined }),
+      isEqual(anonymizeLineItem(x), anonymizeLineItem(curr))
     )
 
     if (equalIndex > -1) {

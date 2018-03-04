@@ -38,15 +38,15 @@ export default handleActions(
 
     [UPDATE_LINE_ITEM]: (
       state,
-      { payload: { index, quantity, customAttributes } },
+      { payload: { id, quantity, customAttributes } },
     ): State =>
       flow([
-        mutators.updateLineItem(index, quantity, customAttributes),
+        mutators.updateLineItem(id, quantity, customAttributes),
         mutators.normalizeLineItems,
       ])(state),
 
-    [REMOVE_LINE_ITEM]: (state, { payload: index }): State =>
-      mutators.removeLineItem(index)(state),
+    [REMOVE_LINE_ITEM]: (state, { payload: id }): State =>
+      mutators.removeLineItem(id)(state),
   },
   defaultState,
 )

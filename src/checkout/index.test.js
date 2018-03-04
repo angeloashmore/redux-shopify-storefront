@@ -5,22 +5,34 @@ import reducer, {
   removeLineItem,
 } from './index'
 
+jest.mock('simple-guid', () => {
+  let count = 0
+  return () => count++
+})
+
 const lineItem = {
+  id: 0,
   variantId: 'variantId',
   quantity: 1,
   customAttributes: [{ key: 'key', value: 'value' }],
 }
 
 const lineItemAlt = {
+  id: 1,
   variantId: 'variantId',
   quantity: 1,
   customAttributes: [{ key: 'key2', value: 'value2' }],
 }
 
 describe('checkout reducer', () => {
+  beforeEach(() => jest.resetAllMocks())
+
   test('should handle addLineItem', () => {
     const state = reducer(undefined, addLineItem(lineItem))
     expect(state.lineItems).toEqual([lineItem])
+
+    const nextState = reducer(state, addLineItem(lineItemAlt))
+    expect(nextState.lineItems).toEqual([lineItem, lineItemAlt])
   })
 
   test('should handle addLineItem with an existing equal line item', () => {
@@ -38,7 +50,7 @@ describe('checkout reducer', () => {
     }
     const state = reducer(
       { ...defaultState, lineItems: [lineItem] },
-      updateLineItem({ index: 0, ...updates }),
+      updateLineItem({ id: 0, ...updates }),
     )
     expect(state.lineItems).toEqual([{ ...lineItem, ...updates }])
   })
@@ -47,7 +59,7 @@ describe('checkout reducer', () => {
     const state = reducer(
       { ...defaultState, lineItems: [lineItem, lineItemAlt] },
       updateLineItem({
-        index: 1,
+        id: 1,
         customAttributes: lineItem.customAttributes,
       }),
     )

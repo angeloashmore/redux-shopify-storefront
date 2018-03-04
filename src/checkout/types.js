@@ -5,6 +5,7 @@ export type State = {
 }
 
 export type CheckoutLineItemInput = {
+  id: string,
   customAttributes: AttributeInput[],
   quantity: number,
   variantId: string,

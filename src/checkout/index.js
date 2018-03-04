@@ -29,7 +29,7 @@ export default handleActions(
     [ADD_LINE_ITEM]: (
       state,
       { payload: { variantId, quantity, customAttributes } },
-    ) =>
+    ): State =>
       flow(
         [
           mutators.addLineItem(variantId, quantity, customAttributes),
@@ -41,7 +41,7 @@ export default handleActions(
     [UPDATE_LINE_ITEM]: (
       state,
       { payload: { index, quantity, customAttributes } },
-    ) =>
+    ): State =>
       flow(
         [
           mutators.updateLineItem(index, quantity, customAttributes),
@@ -50,7 +50,7 @@ export default handleActions(
         state,
       ),
 
-    [REMOVE_LINE_ITEM]: (state, { payload: index }) =>
+    [REMOVE_LINE_ITEM]: (state, { payload: index }): State =>
       mutators.removeLineItem(index)(state),
   },
   defaultState,

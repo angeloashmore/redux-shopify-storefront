@@ -4,7 +4,11 @@ import guid from 'simple-guid'
 import isEqual from 'lodash.isequal'
 import type { State, AttributeInput } from './types'
 
-const anonymizeLineItem = lineItem => ({ ...lineItem, id: undefined, quantity: undefined })
+const anonymizeLineItem = lineItem => ({
+  ...lineItem,
+  id: undefined,
+  quantity: undefined,
+})
 
 export const addLineItem = (
   variantId: string,
@@ -46,7 +50,7 @@ export const normalizeLineItems = (state: State): State => ({
     if (curr.quantity < 1) return acc
 
     const equalIndex = acc.findIndex(x =>
-      isEqual(anonymizeLineItem(x), anonymizeLineItem(curr))
+      isEqual(anonymizeLineItem(x), anonymizeLineItem(curr)),
     )
 
     if (equalIndex > -1) {

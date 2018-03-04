@@ -1,13 +1,30 @@
 {
+  "name": "redux-shopify",
+  "version": "0.1.0",
+  "descrition": "Redux modules for interacting with Shopify",
+  "main": "dist/redux-shopify.cjs.js",
+  "module": "dist/redux-shopify.esm.js",
+  "browser": "dist/redux-shopify.umd.js",
   "scripts": {
-    "format": "prettier --write 'src/**/*.js' 'README.md'"
+    "build": "NODE_ENV=production rollup -c",
+    "format": "prettier --write 'src/**/*.js' 'README.md' 'rollup.config.js'",
+    "prepublish": "npm run build",
+    "watch": "npm run build -- --watch"
   },
   "dependencies": {
-    "invariant": "^2.2.3",
     "lodash-es": "^4.17.5",
     "redux-actions": "^2.2.1"
   },
   "devDependencies": {
-    "prettier": "^1.11.1"
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0-beta.40",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "prettier": "^1.11.1",
+    "rollup": "^0.56.3",
+    "rollup-plugin-babel": "^4.0.0-beta.2",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.3"
   }
 }

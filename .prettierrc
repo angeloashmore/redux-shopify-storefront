@@ -1,5 +1,14 @@
 {
+  "parser": "flow",
   "semi": false,
+  "singleQuote": true,
   "trailingComma": "all",
-  "singleQuote": true
+  "overrides": [
+    {
+      "files": "*.md",
+      "options": {
+        "parser": "markdown"
+      }
+    }
+  ]
 }

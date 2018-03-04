@@ -4,15 +4,21 @@ import isEqual from 'lodash-es/isEqual'
 import type { State, AttributeInput } from './types'
 
 export const addLineItem = (
-  variantId: string!,
-  quantity: number!,
-  customAttributes: AttributeInput = [],
-): ((State) => State) => (state: State!): State => ({
+  variantId: string,
+  quantity: number,
+  customAttributes: AttributeInput[] = [],
+) => (state: State): State => ({
   ...state,
-  lineItems: lineItems.concat([{ variantId, quantity, customAttributes }]),
+  lineItems: state.lineItems.concat([
+    { variantId, quantity, customAttributes },
+  ]),
 })
 
-export const updateLineItem = (index, quantity, customAttributes) => state => ({
+export const updateLineItem = (
+  index: number,
+  quantity: number,
+  customAttributes?: AttributeInput[],
+) => (state: State): State => ({
   ...state,
   lineItems: state.lineItems.map(
     (lineItem, i) =>
@@ -26,12 +32,14 @@ export const updateLineItem = (index, quantity, customAttributes) => state => ({
   ),
 })
 
-export const removeLineItem = index => state => ({
+export const removeLineItem = (index: number) => (state: State): State => ({
   ...state,
-  lineItems: lineItems.slice(0, index).concat(lineItems.slice(index + 1)),
+  lineItems: state.lineItems
+    .slice(0, index)
+    .concat(state.lineItems.slice(index + 1)),
 })
 
-export const normalizeLineItems = state => ({
+export const normalizeLineItems = (state: State): State => ({
   ...state,
   lineItems: [...state.lineItems].reduce((acc, curr) => {
     if (curr.quantity < 1) return acc

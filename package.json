@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "format": "prettier --write 'src/**/*.js' 'README.md'"
+  },
+  "dependencies": {
+    "invariant": "^2.2.3",
+    "lodash-es": "^4.17.5",
+    "redux-actions": "^2.2.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.11.1"
+  }
+}

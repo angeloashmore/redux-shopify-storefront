@@ -1,6 +1,6 @@
 // @flow
 
-import isEqual from 'lodash-es/isEqual'
+import isEqual from 'lodash.isequal'
 import type { State, AttributeInput } from './types'
 
 export const addLineItem = (
@@ -51,7 +51,7 @@ export const normalizeLineItems = (state: State): State => ({
     if (equalIndex > -1) {
       acc[equalIndex].quantity = acc[equalIndex].quantity + curr.quantity
     } else {
-      acc.push(curr)
+      acc.push({ ...curr })
     }
 
     return acc

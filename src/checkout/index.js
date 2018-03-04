@@ -1,7 +1,7 @@
 // @flow
 
 import { createAction, handleActions } from 'redux-actions'
-import flow from 'lodash-es/flow'
+import flow from 'lodash.flow'
 import { createQualifyActionType } from '../util'
 import * as mutators from './mutators'
 import type { State } from './types'
@@ -22,6 +22,7 @@ export const removeLineItem = createAction(REMOVE_LINE_ITEM)
 const defaultState: State = {
   lineItems: [],
 }
+export const _defaultState = defaultState
 
 // Reducer
 export default handleActions(
@@ -30,25 +31,19 @@ export default handleActions(
       state,
       { payload: { variantId, quantity, customAttributes } },
     ): State =>
-      flow(
-        [
-          mutators.addLineItem(variantId, quantity, customAttributes),
-          mutators.normalizeLineItems,
-        ],
-        state,
-      ),
+      flow([
+        mutators.addLineItem(variantId, quantity, customAttributes),
+        mutators.normalizeLineItems,
+      ])(state),
 
     [UPDATE_LINE_ITEM]: (
       state,
       { payload: { index, quantity, customAttributes } },
     ): State =>
-      flow(
-        [
-          mutators.updateLineItem(index, quantity, customAttributes),
-          mutators.normalizeLineItems,
-        ],
-        state,
-      ),
+      flow([
+        mutators.updateLineItem(index, quantity, customAttributes),
+        mutators.normalizeLineItems,
+      ])(state),
 
     [REMOVE_LINE_ITEM]: (state, { payload: index }): State =>
       mutators.removeLineItem(index)(state),

@@ -9,10 +9,13 @@
     "build": "NODE_ENV=production rollup -c",
     "format": "prettier --write 'src/**/*.js' 'README.md' 'rollup.config.js'",
     "prepublish": "npm run build",
+    "test": "jest",
+    "test:watch": "npm run test -- --watch",
     "watch": "npm run build -- --watch"
   },
   "dependencies": {
-    "lodash-es": "^4.17.5",
+    "lodash.flow": "^3.5.0",
+    "lodash.isequal": "^4.5.0",
     "redux-actions": "^2.2.1"
   },
   "devDependencies": {
@@ -21,7 +24,10 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
     "@babel/preset-env": "^7.0.0-beta.40",
     "@babel/preset-flow": "^7.0.0-beta.40",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^22.4.1",
     "flow-bin": "^0.66.0",
+    "jest": "^22.4.2",
     "prettier": "^1.11.1",
     "rollup": "^0.56.3",
     "rollup-plugin-babel": "^4.0.0-beta.2",

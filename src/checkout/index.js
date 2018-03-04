@@ -1,7 +1,10 @@
+// @flow
+
 import { createAction, handleActions } from 'redux-actions'
 import flow from 'lodash-es/flow'
 import { createQualifyActionType } from '../util'
 import * as mutators from './mutators'
+import type { State } from './types'
 
 const qualifyActionType = createQualifyActionType('checkout')
 
@@ -16,7 +19,7 @@ export const updateLineItem = createAction(UPDATE_LINE_ITEM)
 export const removeLineItem = createAction(REMOVE_LINE_ITEM)
 
 // Default State
-const defaultState = {
+const defaultState: State = {
   lineItems: [],
 }
 

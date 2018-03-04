@@ -20,6 +20,8 @@
     "@babel/plugin-proposal-export-default-from": "^7.0.0-beta.40",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
     "@babel/preset-env": "^7.0.0-beta.40",
+    "@babel/preset-flow": "^7.0.0-beta.40",
+    "flow-bin": "^0.66.0",
     "prettier": "^1.11.1",
     "rollup": "^0.56.3",
     "rollup-plugin-babel": "^4.0.0-beta.2",

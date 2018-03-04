@@ -1,10 +1,10 @@
 {
-  "name": "redux-shopify",
+  "name": "redux-shopify-storefront",
   "version": "0.1.0",
-  "descrition": "Redux modules for interacting with Shopify",
-  "main": "dist/redux-shopify.cjs.js",
-  "module": "dist/redux-shopify.esm.js",
-  "browser": "dist/redux-shopify.umd.js",
+  "descrition": "Redux modules for interacting with the Shopify Storefront API",
+  "main": "dist/redux-shopify-storefront.cjs.js",
+  "module": "dist/redux-shopify-storefront.esm.js",
+  "browser": "dist/redux-shopify-storefront.umd.js",
   "scripts": {
     "build": "NODE_ENV=production rollup -c",
     "format": "prettier --write 'src/**/*.js' 'README.md' 'rollup.config.js'",

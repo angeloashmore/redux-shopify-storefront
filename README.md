@@ -1,14 +1,14 @@
-# redux-shopify
+# redux-shopify-storefront
 
-Redux modules for interacting with Shopify.
+Redux modules for interacting with the Shopify Storefront API.
 
 **Status**: Planning
 
 ## Purpose
 
-Provide Shopify functionality to Redux-enabled applications, namely static
-sites. All initial development will be based on providing functionality for a
-Gatsby generated static site.
+Provide Shopify Storefront functionality to Redux-enabled applications, namely
+static sites. All initial development will be based on providing functionality
+for a Gatsby generated static site.
 
 ## Reducer
 

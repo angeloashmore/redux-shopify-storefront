@@ -19,14 +19,16 @@ const lineItemAlt = {
 
 describe('checkout reducer', () => {
   test('should handle addLineItem', () => {
-    const nextState = reducer(undefined, addLineItem(lineItem))
-    expect(nextState.lineItems).toEqual([lineItem])
+    const state = reducer(undefined, addLineItem(lineItem))
+    expect(state.lineItems).toEqual([lineItem])
   })
 
   test('should handle addLineItem with an existing equal line item', () => {
-    const state = { ...defaultState, lineItems: [lineItem] }
-    const nextState = reducer(state, addLineItem(lineItem))
-    expect(nextState.lineItems).toEqual([{ ...lineItem, quantity: 2 }])
+    const state = reducer(
+      { ...defaultState, lineItems: [lineItem] },
+      addLineItem(lineItem),
+    )
+    expect(state.lineItems).toEqual([{ ...lineItem, quantity: 2 }])
   })
 
   test('should handle updateLineItem', () => {
@@ -34,26 +36,29 @@ describe('checkout reducer', () => {
       quantity: 2,
       customAttributes: [{ key: 'key2', value: 'value2' }],
     }
-    const state = { ...defaultState, lineItems: [lineItem] }
-    const nextState = reducer(state, updateLineItem({ index: 0, ...updates }))
-    expect(nextState.lineItems).toEqual([{ ...lineItem, ...updates }])
+    const state = reducer(
+      { ...defaultState, lineItems: [lineItem] },
+      updateLineItem({ index: 0, ...updates }),
+    )
+    expect(state.lineItems).toEqual([{ ...lineItem, ...updates }])
   })
 
   test('should handle updateLineItem with an existing equal line item', () => {
-    const state = { ...defaultState, lineItems: [lineItem, lineItemAlt] }
-    const nextState = reducer(
-      state,
+    const state = reducer(
+      { ...defaultState, lineItems: [lineItem, lineItemAlt] },
       updateLineItem({
         index: 1,
-        customAttributes: state.lineItems[0].customAttributes,
+        customAttributes: lineItem.customAttributes,
       }),
     )
-    expect(nextState.lineItems).toEqual([{ ...lineItem, quantity: 2 }])
+    expect(state.lineItems).toEqual([{ ...lineItem, quantity: 2 }])
   })
 
   test('should handle removeLineItem', () => {
-    const state = { ...defaultState, lineItems: [lineItem] }
-    const nextState = reducer(state, removeLineItem(0))
-    expect(nextState.lineItems).toEqual([])
+    const state = reducer(
+      { ...defaultState, lineItems: [lineItem] },
+      removeLineItem(0),
+    )
+    expect(state.lineItems).toEqual([])
   })
 })

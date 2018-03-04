@@ -1,10 +1,13 @@
+// @flow
+
 import isEqual from 'lodash-es/isEqual'
+import type { State, AttributeInput } from './types'
 
 export const addLineItem = (
-  variantId,
-  quantity,
-  customAttributes,
-) => state => ({
+  variantId: string!,
+  quantity: number!,
+  customAttributes: AttributeInput = [],
+): ((State) => State) => (state: State!): State => ({
   ...state,
   lineItems: lineItems.concat([{ variantId, quantity, customAttributes }]),
 })

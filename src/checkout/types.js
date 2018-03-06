@@ -1,7 +1,9 @@
 // @flow
 
 export type State = {
+  checkoutId: ?string,
   lineItems: CheckoutLineItemInput[],
+  webUrl: ?string,
 }
 
 export type CheckoutLineItemInput = {

@@ -62,3 +62,13 @@ export const normalizeLineItems = (state: State): State => ({
     return acc
   }, []),
 })
+
+export const setCheckoutId = (checkoutId: string) => (state: State): State => ({
+  ...state,
+  checkoutId,
+})
+
+export const setWebUrl = (webUrl: string) => (state: State): State => ({
+  ...state,
+  webUrl,
+})

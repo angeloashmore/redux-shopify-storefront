@@ -3,6 +3,8 @@ import reducer, {
   addLineItem,
   updateLineItem,
   removeLineItem,
+  setCheckoutId,
+  setWebUrl,
 } from './index'
 
 jest.mock('simple-guid', () => {
@@ -72,5 +74,15 @@ describe('checkout reducer', () => {
       removeLineItem(0),
     )
     expect(state.lineItems).toEqual([])
+  })
+
+  test('should handle setCheckoutId', () => {
+    const state = reducer(undefined, setCheckoutId('checkoutId'))
+    expect(state.checkoutId).toEqual('checkoutId')
+  })
+
+  test('should handle setWebUrl', () => {
+    const state = reducer(undefined, setWebUrl('webUrl'))
+    expect(state.webUrl).toEqual('webUrl')
   })
 })

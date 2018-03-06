@@ -7,9 +7,6 @@ import {
   setWebUrl,
 } from './index'
 
-// NOTE: client undefined. Need to implement a way to pass the Shopify domain
-// and storefront access token.
-
 function* createCheckoutSaga({ client }) {
   const checkoutCreateInput = yield select(state => pick(state, ['lineItems']))
 

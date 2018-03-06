@@ -36,7 +36,7 @@ const defaultState: State = {
   lineItems: [],
   webUrl: null,
 }
-export const _defaultState = defaultState
+export { defaultState as _defaultState }
 
 // Reducer
 export default handleActions(

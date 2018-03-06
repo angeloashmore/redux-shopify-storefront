@@ -31,24 +31,24 @@ import createSagaMiddleware from 'redux-saga'
 
 import Shopify from 'shopify-buy'
 import {
-  createCheckoutMiddleware,
   checkoutReducer,
-  checkoutSaga,
+  createShopifyMiddleware,
+  shopifySaga,
   addLineItem,
 } from 'redux-shopify-storefront'
 
 import reducers from './reducers' // Or wherever you keep your reducers
 
 // Create a Shopify client
-const client = Shopify.buildClient({
+const shopify = Shopify.buildClient({
   domain: 'your-shop-name.myshopify.com',
   storefrontAccessToken: 'your-storefront-access-token',
 })
 
-// Build the middleware for intercepting Shopify actions to provide the client
-const checkoutMiddleware = createCheckoutMiddleware(client)
+// Build the middleware for intercepting Shopify actions
+const shopifyMiddleware = createShopifyMiddleware(shopify)
 
-// Build the middleware for the saga.
+// Build the middleware for the saga
 const sagaMiddleware = createSagaMiddleware()
 
 // Add the reducer to your store on the `checkout` key
@@ -60,11 +60,11 @@ const store = createStore(
   applyMiddleware(checkoutMiddleware, sagaMiddleware),
 )
 
+// Run the saga.
+sagaMiddleware.run(shopifySaga)
+
 // Now you can dispatch Shopify actions from anywhere!
 // store.dispatch(addLineItem({ variantId: 'my-product-variant-id' }))
-
-// Run the saga.
-sagaMiddleware.run(checkoutSaga)
 
 ReactDOM.render(
   <Provider store={store}>{/* Your app here */}</Provider>,

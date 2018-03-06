@@ -14,6 +14,7 @@
     "watch": "npm run build -- --watch"
   },
   "dependencies": {
+    "invariant": "^2.2.3",
     "lodash.flow": "^3.5.0",
     "lodash.isequal": "^4.5.0",
     "lodash.pick": "^4.4.0",
@@ -37,5 +38,8 @@
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-resolve": "^3.0.3"
+  },
+  "peerDependencies": {
+    "redux-saga": "^0.16.0"
   }
 }

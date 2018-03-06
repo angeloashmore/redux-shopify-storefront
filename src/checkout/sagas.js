@@ -1,6 +1,11 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects'
 import pick from 'lodash.pick'
-import { UPDATE_CHECKOUT, CREATE_CHECKOUT, setCheckoutId, setWebUrl } from './index'
+import {
+  UPDATE_CHECKOUT,
+  CREATE_CHECKOUT,
+  setCheckoutId,
+  setWebUrl,
+} from './index'
 
 // NOTE: client undefined. Need to implement a way to pass the Shopify domain
 // and storefront access token.
@@ -20,7 +25,9 @@ function* updateCheckoutSaga() {
   if (!checkoutId) yield call(createCheckoutSaga)
 }
 
-export default sagas = [
+const sagas = [
   takeEvery(CREATE_CHECKOUT, createCheckoutSaga),
   takeEvery(UPDATE_CHECKOUT, updateCheckoutSaga),
 ]
+
+export default sagas

@@ -7,18 +7,19 @@ Redux modules for interacting with the Shopify Storefront API.
 ## Purpose
 
 Provide Shopify Storefront functionality to Redux-enabled applications, namely
-static sites. All initial development will be based on providing functionality
-for a Gatsby generated static site.
+static sites. All initial development will be focused on providing
+functionality to a Gatsby generated static site.
 
 ## Setup
 
 Integrating `redux-shopify-storefront` consists of two parts:
 
-1.  Adding the reducers
-2.  Adding the sagas
+1.  Adding the reducer
+2.  Adding the saga
 
-The following basic setup handles both. If your application is using sagas, a
-slightly different setup is needed to merge the provided saga with yours.
+The following basic setup handles both. If your application is already using
+sagas, a slightly different setup is needed to merge the provided saga with
+yours.
 
 ```js
 import React from 'react'

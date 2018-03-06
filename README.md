@@ -10,6 +10,40 @@ Provide Shopify Storefront functionality to Redux-enabled applications, namely
 static sites. All initial development will be based on providing functionality
 for a Gatsby generated static site.
 
+## Setup
+
+Integrating `redux-shopify-storefront` consists of two parts:
+
+1.  Adding the reducers
+2.  Adding the sagas
+
+The following basic setup handles both. If your application is using sagas, a
+slightly different setup is needed to merge the provided saga with yours.
+
+```js
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import { checkoutReducer, checkoutSaga } from 'redux-shopify-storefront'
+
+import reducers from '<project-path>/reducers'
+
+const sagaMiddleware = createSagaMiddleware()
+
+// Add the reducer to your store on the `checkout` key
+const store = createStore(
+  combineReducers({
+    ...reducers,
+    checkout: checkoutReducer,
+  }),
+  applyMiddleware(sagaMiddleware),
+)
+
+// Run the saga.
+sagaMiddleware.run(checkoutSaga)
+```
+
+# Notes
+
 ## Reducer
 
 All data is held in single reducer. This includes checkout line items and

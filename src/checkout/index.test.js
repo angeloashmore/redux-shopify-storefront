@@ -1,3 +1,4 @@
+import { ensureState } from 'redux-optimistic-ui'
 import reducer, {
   _defaultState as defaultState,
   addLineItem,
@@ -31,10 +32,10 @@ describe('checkout reducer', () => {
 
   test('should handle addLineItem', () => {
     const state = reducer(undefined, addLineItem(lineItem))
-    expect(state.lineItems).toEqual([lineItem])
+    expect(ensureState(state).lineItems).toEqual([lineItem])
 
     const nextState = reducer(state, addLineItem(lineItemAlt))
-    expect(nextState.lineItems).toEqual([lineItem, lineItemAlt])
+    expect(ensureState(nextState).lineItems).toEqual([lineItem, lineItemAlt])
   })
 
   test('should handle addLineItem with an existing equal line item', () => {
@@ -42,7 +43,7 @@ describe('checkout reducer', () => {
       { ...defaultState, lineItems: [lineItem] },
       addLineItem(lineItem),
     )
-    expect(state.lineItems).toEqual([{ ...lineItem, quantity: 2 }])
+    expect(ensureState(state).lineItems).toEqual([{ ...lineItem, quantity: 2 }])
   })
 
   test('should handle updateLineItem', () => {
@@ -54,7 +55,7 @@ describe('checkout reducer', () => {
       { ...defaultState, lineItems: [lineItem] },
       updateLineItem({ id: 0, ...updates }),
     )
-    expect(state.lineItems).toEqual([{ ...lineItem, ...updates }])
+    expect(ensureState(state).lineItems).toEqual([{ ...lineItem, ...updates }])
   })
 
   test('should handle updateLineItem with an existing equal line item', () => {
@@ -65,7 +66,7 @@ describe('checkout reducer', () => {
         customAttributes: lineItem.customAttributes,
       }),
     )
-    expect(state.lineItems).toEqual([{ ...lineItem, quantity: 2 }])
+    expect(ensureState(state).lineItems).toEqual([{ ...lineItem, quantity: 2 }])
   })
 
   test('should handle removeLineItem', () => {
@@ -73,16 +74,16 @@ describe('checkout reducer', () => {
       { ...defaultState, lineItems: [lineItem] },
       removeLineItem(0),
     )
-    expect(state.lineItems).toEqual([])
+    expect(ensureState(state).lineItems).toEqual([])
   })
 
   test('should handle setCheckoutId', () => {
     const state = reducer(undefined, setCheckoutId('checkoutId'))
-    expect(state.checkoutId).toEqual('checkoutId')
+    expect(ensureState(state).checkoutId).toEqual('checkoutId')
   })
 
   test('should handle setWebUrl', () => {
     const state = reducer(undefined, setWebUrl('webUrl'))
-    expect(state.webUrl).toEqual('webUrl')
+    expect(ensureState(state).webUrl).toEqual('webUrl')
   })
 })

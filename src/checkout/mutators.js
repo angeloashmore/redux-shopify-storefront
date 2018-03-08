@@ -12,7 +12,7 @@ const anonymizeLineItem = lineItem => ({
 
 export const addLineItem = (
   variantId: string,
-  quantity: number,
+  quantity: number = 1,
   customAttributes: AttributeInput[] = [],
 ) => (state: State): State => ({
   ...state,

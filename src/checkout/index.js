@@ -1,6 +1,7 @@
 // @flow
 
 import { createAction, handleActions } from 'redux-actions'
+import { optimistic } from 'redux-optimistic-ui'
 import flow from 'lodash.flow'
 import { createQualifyActionType } from '../util'
 import * as mutators from './mutators'
@@ -39,7 +40,7 @@ const defaultState: State = {
 export { defaultState as _defaultState }
 
 // Reducer
-export default handleActions(
+const reducer = handleActions(
   {
     [ADD_LINE_ITEM]: (
       state,
@@ -70,3 +71,6 @@ export default handleActions(
   },
   defaultState,
 )
+
+// Optimistic Reducer
+export default optimistic(reducer)

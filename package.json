@@ -17,9 +17,9 @@
     "invariant": "^2.2.3",
     "lodash.flow": "^3.5.0",
     "lodash.isequal": "^4.5.0",
-    "lodash.pick": "^4.4.0",
     "redux-actions": "^2.2.1",
-    "shopify-buy": "^1.1.0",
+    "redux-optimistic-ui": "^3.1.0",
+    "redux-saga": "^0.16.0",
     "simple-guid": "^0.0.1"
   },
   "devDependencies": {
@@ -40,6 +40,6 @@
     "rollup-plugin-node-resolve": "^3.0.3"
   },
   "peerDependencies": {
-    "redux-saga": "^0.16.0"
+    "shopify-buy": "^1.2.0"
   }
 }

@@ -20,7 +20,7 @@ Integrating `react-shopify-storefront` consists of two parts:
 The following example demonstrates a simple use case:
 
 ```js
-# ./index.js
+// ./index.js
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ShopifyProvider } from 'react-shopify-storefront'
@@ -38,7 +38,7 @@ ReactDOM.render(
 ```
 
 ```js
-# ./components/App.js
+// ./components/App.js
 import React from 'react'
 import { ShopifyConsumer } from 'react-shopify-storefront'
 

@@ -12,6 +12,61 @@ functionality to a Gatsby generated static site.
 
 ## Setup
 
+Integrating `react-shopify-storefront` consists of two parts:
+
+1.  Set up a `<ShopifyProvider>` at the root of your app
+1.  Using `<ShopifyConsumer>` within your app
+
+The following example demonstrates a simple use case:
+
+```js
+# ./index.js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { ShopifyProvider } from 'react-shopify-storefront'
+import App from './components/App'
+
+ReactDOM.render(
+  <ShopifyProvider
+    domain="your-shop-name.myshopify.com"
+    storefrontAccessToken="your-storefront-access-token"
+  >
+    <App />
+  </ShopifyProvider>,
+  document.getElementById('root'),
+)
+```
+
+```js
+# ./components/App.js
+import React from 'react'
+import { ShopifyConsumer } from 'react-shopify-storefront'
+
+const App = () => (
+  <ShopifyConsumer>
+    {({ isLoading, addLineItem }) => (
+      <div class="item-variant">
+        <span class="item-variant__name">My Product</span>
+        {isLoading ? (
+          {/* Render a spinner */}
+        ) : (
+          <button
+            class="item-variant__add"
+            onClick={addLineItem}
+          >
+            Add to Cart
+          </button>
+        )}
+      </div>
+    )}
+  </ShopifyConsumer>
+)
+
+export default App
+```
+
+## Setup - Old Redux Method
+
 Integrating `redux-shopify-storefront` consists of two parts:
 
 1.  Adding the reducer

@@ -4,12 +4,22 @@ import guid from 'simple-guid'
 import isEqual from 'lodash.isequal'
 import type { State, AttributeInput } from './types'
 
+/***
+ * Helpers
+ */
+
+// Remove ID and quantity line item metadata. Use to check line item equality.
 const anonymizeLineItem = lineItem => ({
   ...lineItem,
   id: undefined,
   quantity: undefined,
 })
 
+/***
+ * Mutators
+ */
+
+// Add a line item with a given quantity.
 export const addLineItem = (
   variantId: string,
   quantity: number = 1,
@@ -21,6 +31,7 @@ export const addLineItem = (
   ]),
 })
 
+// Update an existing line item. Quantity and custom attributes can be updated.
 export const updateLineItem = (
   id: string,
   quantity: number,
@@ -39,11 +50,14 @@ export const updateLineItem = (
   ),
 })
 
+// Remove a line item by line item ID.
 export const removeLineItem = (id: string) => (state: State): State => ({
   ...state,
   lineItems: state.lineItems.filter(lineItem => lineItem.id !== id),
 })
 
+// Merge line items with the same metadata and remove line items with a
+// quantity less than one. Use after performing a line item mutation.
 export const normalizeLineItems = (state: State): State => ({
   ...state,
   lineItems: [...state.lineItems].reduce((acc, curr) => {
@@ -63,11 +77,13 @@ export const normalizeLineItems = (state: State): State => ({
   }, []),
 })
 
+// Set the checkout ID.
 export const setCheckoutId = (checkoutId: string) => (state: State): State => ({
   ...state,
   checkoutId,
 })
 
+// Set the web URL.
 export const setWebUrl = (webUrl: string) => (state: State): State => ({
   ...state,
   webUrl,
